@@ -10,14 +10,14 @@ export default class TeamItem extends Component<Props>{
     const { team } = this.props;
 
     return (
-      <TouchableOpacity>
+   
         <View style={styles.item}>
           <Image style={styles.team_shield} source={team.team_shield_url} />
           <Text style={styles.team_position}>{team.position}</Text>
           <Text style={styles.team_name}>{team.team_name}</Text>
           <Text style={styles.team_position}>{team.team_points}</Text>
         </View>
-      </TouchableOpacity>
+      
     );
   }
 }

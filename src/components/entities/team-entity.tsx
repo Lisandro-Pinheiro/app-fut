@@ -1,7 +1,7 @@
 export default class TeamEntity{
-    id:number;
+    id: number;
+    name: string;
+    shieldUrl: string;
+    points: number;
     position: number;
-    team_shield_url: string;
-    team_name: string;
-    team_points:number;
 }
