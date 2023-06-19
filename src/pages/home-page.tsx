@@ -37,10 +37,6 @@ export default function App({ navigation }) {
             points: team.pontos,
             position: team.posicao,
             shieldUrl: team.time.escudo,
-            partidas: team.partida_id,
-            placar: team.placar
-
-            
           });
 
           let rodadaList: RodadaEntity[] = [];
