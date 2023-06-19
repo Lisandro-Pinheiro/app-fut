@@ -3,19 +3,20 @@ import { View, StyleSheet, FlatList } from 'react-native';
 import TeamItem from './team-item';
 
 interface Props {
-  teams: any;
+  teams: any[];
+  onTeamPress: (team: any) => void;
 }
-export default class TeamTable extends Component  <Props>{
 
+export default class TeamTable extends Component<Props> {
   render() {
-    const { teams } = this.props;
+    const { teams, onTeamPress } = this.props;
 
     return (
       <View style={styles.table}>
         <FlatList
           data={teams}
           keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => <TeamItem team={item} />}
+          renderItem={({ item }) => <TeamItem team={item} onPress={() => onTeamPress(item)} />}
         />
       </View>
     );
@@ -25,8 +26,6 @@ export default class TeamTable extends Component  <Props>{
 const styles = StyleSheet.create({
   table: {
     flex: 1,
-    width: '100%'
+    width: '100%',
   },
 });
-
-

@@ -1,8 +1,9 @@
-import { FlatList, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
+import { Button, FlatList, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
 import { Image } from 'expo-image';
 import { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import TeamEntity from '../components/entities/team-entity';
+import RodadaEntity from '../components/entities/rodada-entity';
 
 const mockData: TeamEntity[] = []
 
@@ -12,7 +13,6 @@ export default function App({ navigation }) {
   const [teams, setTeams] = useState([]);
 
   useEffect(() => {
-    //Acessar a api
     var myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer test_6d5fc2c478e24996bad8a5d9e08ac9");
     myHeaders.append("Cookie", "PHPSESSID=0719g0tmuceo5e1gaunt8onhev");
@@ -37,6 +37,21 @@ export default function App({ navigation }) {
             points: team.pontos,
             position: team.posicao,
             shieldUrl: team.time.escudo,
+            partidas: team.partida_id,
+            placar: team.placar
+
+            
+          });
+
+          let rodadaList: RodadaEntity[] = [];
+
+          console.log(result);
+
+          result.map((team) => {
+            rodadaList.push({
+              partida_id: team.partida_id,
+              placar: team.placar
+            });
           });
         });
 
@@ -44,6 +59,8 @@ export default function App({ navigation }) {
 
         setTeams(teamsList);
       })
+
+      
       .catch(error => console.log('error', error));
   }, []);
 
@@ -63,7 +80,8 @@ export default function App({ navigation }) {
               <Text style={styles.team_name}>{team.item.name}</Text>
               <Text style={styles.number}>{team.item.points}</Text>
             </View>
-          </TouchableOpacity>
+          </TouchableOpacity> 
+
         }
         keyExtractor={item => item.id.toString()}
       />
@@ -80,11 +98,11 @@ const styles = StyleSheet.create({
   },
   title: {
     width: '100%',
-    fontSize: 50,
+    fontSize: 40,
     fontWeight: '700',
     marginTop: 50,
     color: '#000',
-    textAlign: 'left',
+    textAlign: 'center',
     marginLeft: 32,
     borderRadius: 17
   },
